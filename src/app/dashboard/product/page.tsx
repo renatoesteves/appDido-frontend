@@ -1,7 +1,19 @@
 import { Form } from './components/form'
-export default function Product() {
+import { api } from '@/services/api'
+import { getCookieServer } from '@/lib/cookieServer'
+
+export default async function Product() {
+
+    const token = await getCookieServer();
+    const response = await api.get("/category", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    // console.log(response.data);
     return (
-        <Form>
+        <Form categories={response.data}>
 
         </Form>
     )
