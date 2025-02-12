@@ -5,12 +5,11 @@ import { api } from "./services/api";
 export async function middleware(req: NextRequest) {
 
     const { pathname } = req.nextUrl
+    const token = await getCookieServer();
 
     if (pathname.startsWith("/_next") || pathname === "/") {
         return NextResponse.next();
     }
-
-    const token = await getCookieServer();
 
     if (pathname.startsWith("/dashboard")) {
         if (!token) {
@@ -18,7 +17,7 @@ export async function middleware(req: NextRequest) {
         }
 
         const isValid = await validateToken(token)
-        console.log("Usuário validado e logado com sucesso! =>",isValid)
+        console.log("Usuário validado e logado com sucesso! =>", isValid)
         if (!isValid) {
             return NextResponse.redirect(new URL("/", req.url))
         }
