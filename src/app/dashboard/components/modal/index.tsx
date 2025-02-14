@@ -23,9 +23,9 @@ export function ModalOrder() {
                 </button>
                 <article className={styles.container}>
                     <h2>Detalhes do Pedido</h2>
-                    <span className={styles.table}>
-                        Mesa <b>{order[0].order.table}</b>
-                    </span>
+                        <span className={styles.table}>
+                            Mesa <b>{order[0].order.table}</b>
+                        </span>
                     {order[0].order?.name && (
                         <span className={styles.name}>
                             <b>{order[0].order.name}</b>
